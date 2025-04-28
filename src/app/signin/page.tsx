@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { SIGN_IN } from "@/graphql/mutations";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { ApolloError } from "@apollo/client";
 
 export default function Signin() {
   const [email, setEmail] = useState("");
@@ -21,13 +22,14 @@ export default function Signin() {
       const { data } = await login({
         variables: { email, password },
       });
-
+  
       localStorage.setItem("token", data.login.access_token);
       toast.success("Signin successful!");
       router.push("/dashboard");
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error.message || "Signin failed");
+    } catch (error: unknown) {
+      const err = error as ApolloError;
+      console.error(err);
+      toast.error(err.message || "Signin failed");
     }
   };
 
@@ -94,7 +96,7 @@ export default function Signin() {
           </button>
         </form>
         <h5 className="text-center mt-10">
-          Don't have an account?{" "}
+          Don't have an account?
           <span className="text-[#347C8D] ml-1">
             <Link href="/signup">Sign Up</Link>
           </span>

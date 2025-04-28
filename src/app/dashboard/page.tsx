@@ -10,6 +10,7 @@ import {
   DELETE_TODO,
 } from "@/graphql/mutations";
 import toast, { Toaster } from "react-hot-toast";
+import { ApolloError } from "@apollo/client";
 
 // Define Todo type
 type Todo = {
@@ -73,15 +74,16 @@ export default function Dashboard() {
         refetchQueries: [{ query: GET_TODOS }],
       });
       console.log("Update success:", result);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err as ApolloError;
       console.error("Update failed:", {
-        error: err,
-        graphQLErrors: err.graphQLErrors,
-        networkError: err.networkError,
+        error,
+        graphQLErrors: error.graphQLErrors,
+        networkError: error.networkError,
       });
     }
   };
-
+  
   const handleDeleteTodo = async (id: string) => {
     try {
       const result = await deleteTodo({
@@ -89,14 +91,16 @@ export default function Dashboard() {
         refetchQueries: [{ query: GET_TODOS }],
       });
       console.log("Delete success:", result);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const error = err as ApolloError;
       console.error("Delete failed:", {
-        error: err,
-        graphQLErrors: err.graphQLErrors,
-        networkError: err.networkError,
+        error,
+        graphQLErrors: error.graphQLErrors,
+        networkError: error.networkError,
       });
     }
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem("token");
