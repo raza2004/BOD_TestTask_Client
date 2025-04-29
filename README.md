@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Running the project locally with CORS enabled
+To run the project locally with CORS enabled, you have to change the following lines in the `src/lib/apollo.ts` file:
+```typescript
+const httpLink = createHttpLink({
+  uri: 'https://sound-katie-raza2004-4eb49e1e.koyeb.app/graphql',
+});
+```
+to
+```typescript
+const httpLink = createHttpLink({
+    uri: 'http://localhost:8000/graphql',
+});
+```
+    
