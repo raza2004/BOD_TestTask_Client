@@ -25,7 +25,7 @@ export default function Signin() {
   
       localStorage.setItem("token", data.login.access_token);
       toast.success("Signin successful!");
-      router.push("/dashboard");
+      router.push("/");
     } catch (error: unknown) {
       const err = error as ApolloError;
       console.error(err);
