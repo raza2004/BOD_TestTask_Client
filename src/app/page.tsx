@@ -66,7 +66,7 @@ export default function Dashboard() {
 
   const handleToggleComplete = async (id: string, completed: boolean) => {
     try {
-      const result = await updateTodo({
+    await updateTodo({
         variables: {
           id: id,
           completed: !completed,
