@@ -6,6 +6,8 @@ const httpLink = createHttpLink({
   uri: 'https://sound-katie-raza2004-4eb49e1e.koyeb.app/graphql',
 });
 
+console.log( "check 1", httpLink);
+
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token');
   return {
