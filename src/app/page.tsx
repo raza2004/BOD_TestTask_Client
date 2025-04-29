@@ -86,11 +86,11 @@ export default function Dashboard() {
   
   const handleDeleteTodo = async (id: string) => {
     try {
-      const result = await deleteTodo({
+      await deleteTodo({
         variables: { id },
         refetchQueries: [{ query: GET_TODOS }],
       });
-      
+  
     } catch (err: unknown) {
       const error = err as ApolloError;
       console.error("Delete failed:", {
