@@ -73,7 +73,7 @@ export default function Dashboard() {
         },
         refetchQueries: [{ query: GET_TODOS }],
       });
-      console.log("Update success:", result);
+    
     } catch (err: unknown) {
       const error = err as ApolloError;
       console.error("Update failed:", {
@@ -90,7 +90,7 @@ export default function Dashboard() {
         variables: { id },
         refetchQueries: [{ query: GET_TODOS }],
       });
-      console.log("Delete success:", result);
+      
     } catch (err: unknown) {
       const error = err as ApolloError;
       console.error("Delete failed:", {
